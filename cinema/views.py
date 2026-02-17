@@ -1,3 +1,4 @@
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets, mixins, generics, status
@@ -31,7 +32,7 @@ class GenreList(APIView):
 
 class GenreDetail(APIView):
     def get_object(self, pk):
-        genre = Genre.objects.get(pk=pk)
+        genre = get_object_or_404(Genre, pk=pk)
         return genre
 
     def get(self, request, pk):
