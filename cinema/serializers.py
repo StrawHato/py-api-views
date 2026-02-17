@@ -10,6 +10,7 @@ class MovieSerializer(serializers.ModelSerializer):
     genres = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Genre.objects.all()
     )
+
     class Meta:
         model = Movie
         fields = "__all__"
