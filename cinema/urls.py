@@ -6,8 +6,7 @@ from cinema.views import (
     GenreDetail,
     ActorList,
     ActorDetail,
-    CinemaHallList,
-    CinemaHallDetail,
+    CinemaHallViewSet
 )
 
 router = routers.DefaultRouter()
@@ -18,11 +17,27 @@ urlpatterns = [
     path("genres/<int:pk>/", GenreDetail.as_view(), name="genres-detail"),
     path("actors/", ActorList.as_view(), name="actors-list"),
     path("actors/<int:pk>/", ActorDetail.as_view(), name="actors-detail"),
-    path("cinema-hall/", CinemaHallList.as_view(), name="cinema-hall-list"),
     path(
-        "cinema-hall/<int:pk>/",
-        CinemaHallDetail.as_view(),
-        name="cinema-hall-detail"
+        "cinema_halls/",
+        CinemaHallViewSet.as_view(
+            actions={
+                "get": "list",
+                "post": "create",
+            }
+        ),
+        name="cinema-halls-list"
+    ),
+    path(
+        "cinema_halls/<int:pk>/",
+        CinemaHallViewSet.as_view(
+            actions={
+                "get": "retrieve",
+                "put": "update",
+                "patch": "partial_update",
+                "delete": "destroy"
+            }
+        ),
+        name="cinema-halls-detail"
     ),
 ]
 
